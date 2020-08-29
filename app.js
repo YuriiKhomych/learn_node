@@ -9,9 +9,7 @@ var mongoose = require('mongoose');
 var app = express();
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/tutorial2', {
-  useMongoClient: true
-});
+mongoose.connect('mongodb://localhost:27017/tutorial2');
 
 var db = mongoose.connection;
 
@@ -31,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser()); app.use(express.static(path.join(__dirname, 'public')));
 
 // Include controllers 
-fs.readdirSync("controllers").forEach(function (file) {
+fs.readdirSync(path.join(__dirname, "controllers")).forEach(function (file) {
   if (file.substr(-3) == ".js") {
     const route = require("./controllers/" + file)
     route.controller(app)
